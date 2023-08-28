@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import '../App.css'
 import axios from 'axios'
-import Modal from './DetailsModal'
 import DetailsModal from './DetailsModal'
 const LandingPage = () => {
     const [pokemons, setpokemons] = useState([])
@@ -16,11 +15,20 @@ const LandingPage = () => {
             setshowDetails(false)
         }
     }
+    const [previous, setprevious] = useState(true)
+    const [next, setnext] = useState(true)
     const getPokemons = async () => {
         await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=5`)
-            .then((res) => {
+        .then((res) => {
+                console.log(res)
                 if (res.status === 200) {
                     setpokemons(res.data)
+                    if(res.data.previous !== null){
+                        setprevious(false)
+                    }
+                    if(res.data.next !== null){
+                        setnext(false)
+                    }
                 }
             })
             .catch((err) => {
@@ -29,7 +37,7 @@ const LandingPage = () => {
     }
     useEffect(() => {
         getPokemons()
-    }, [])
+    }, [offset])
     return (
         <>
             <DetailsModal handleModal={handleModal} isShow={showDetails} url={url} />
@@ -45,8 +53,8 @@ const LandingPage = () => {
 
                 </div>
                 <div className="pagination">
-                    <button className="previous">previos</button>
-                    <button className="next">next</button>
+                    <button disabled={previous} onClick={()=>setoffset(offset-5)} className="previous">previos</button>
+                    <button disabled={next} onClick={()=>setoffset(offset+5)} className="next">next</button>
                 </div>
             </div>
         </>

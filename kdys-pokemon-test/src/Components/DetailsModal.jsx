@@ -22,7 +22,6 @@ function DetailsModal({ isShow, url, handleModal }) {
             getDetails()
         }
     }, [isShow, url])
-    console.log(pokemonDetails, 'pokemondetails')
 
     const [show, setShow] = useState(isShow);
 

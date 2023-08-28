@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&display=swap');
 
 .main-page {
-  padding-inline: 8%;
+  padding-inline: 10%;
 }
 
 .main-page .inner-div {
@@ -55,4 +55,8 @@
   border-radius: 10px;
   font-size: 20px;
 
+}
+.pagination button:disabled{
+background-color: rgb(197, 197, 197) !important;
+border: gray;
 }
