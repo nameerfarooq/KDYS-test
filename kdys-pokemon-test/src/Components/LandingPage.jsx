@@ -26,8 +26,16 @@ const LandingPage = () => {
                     if(res.data.previous !== null){
                         setprevious(false)
                     }
+                    else{
+                        
+                        setprevious(true)
+                    }
                     if(res.data.next !== null){
                         setnext(false)
+                    }
+                    else{
+                        setnext(true)
+
                     }
                 }
             })
